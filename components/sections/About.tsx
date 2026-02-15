@@ -11,7 +11,7 @@ export default function About({ lang }: Props) {
   const t = i18n[lang].about;
 
   return (
-      <div className="py-16">
+      <div className="py-8">
         <h2 className="text-2xl font-semibold tracking-tight">
           {t.title}
         </h2>
@@ -20,9 +20,9 @@ export default function About({ lang }: Props) {
           {t.intro}
         </p>
 
-        <Separator className="my-8" />
+        {/*<Separator className="my-4" />*/}
 
-        <div className="grid gap-4 sm:grid-cols-2">
+        <div className="grid gap-4 sm:grid-cols-2 mt-8">
           <Card>
             <CardContent className="p-5">
               <h3 className="font-medium">{t.whatIDo}</h3>

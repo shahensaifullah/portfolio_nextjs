@@ -25,7 +25,7 @@ export default function Hero({lang}: Props) {
     ];
 
     return (
-        <div className="py-16">
+        <div className="py-8">
             <div className="grid gap-10 md:grid-cols-[1fr_280px] md:items-center">
                 {/* Left */}
                 <div className="flex flex-col gap-4">

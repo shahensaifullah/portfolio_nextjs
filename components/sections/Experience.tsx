@@ -12,13 +12,13 @@ export default function Experience({ lang }: Props) {
     const t = i18n[lang].experience;
 
     return (
-        <div className="py-16">
+        <div className="py-8">
             <h2 className="text-2xl font-semibold tracking-tight">{t.title}</h2>
-            <p className="mt-3 max-w-2xl text-muted-foreground leading-relaxed">
-                {t.subtitle}
-            </p>
+            {/*<p className="mt-3 max-w-2xl text-muted-foreground leading-relaxed">*/}
+            {/*    {t.subtitle}*/}
+            {/*</p>*/}
 
-            <Separator className="my-8" />
+            <Separator className="my-4" />
 
             <div className="grid gap-4">
                 {experience.map((e) => (
