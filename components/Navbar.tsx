@@ -31,7 +31,7 @@ export default function Navbar({ lang, setLang }: Props) {
     const t = i18n[lang];
     const cvHref = lang === "de" ? "/resume-de.pdf" : "/resume-en.pdf";
 
-    const { theme, setTheme } = useTheme();
+    const { resolvedTheme, setTheme } = useTheme();
 
     // Desktop-only collapse state
     const [collapsed, setCollapsed] = useState(false);
@@ -79,11 +79,14 @@ export default function Navbar({ lang, setLang }: Props) {
 
     const toggleLang = () => setLang(lang === "en" ? "de" : "en");
 
+    const isDarkTheme = resolvedTheme === "dark";
+
     const toggleTheme = () => {
-        // If system, flip based on current resolved look:
-        // But simplest: just toggle between light/dark
-        setTheme(theme === "dark" ? "light" : "dark");
+        setTheme(isDarkTheme ? "light" : "dark");
     };
+
+    const nextLangLabel = lang === "en" ? "DE" : "EN";
+    const nextThemeLabel = isDarkTheme ? "White" : "Black";
 
     const isActive = (id: string) => id === activeId;
 
@@ -152,12 +155,12 @@ export default function Navbar({ lang, setLang }: Props) {
                                 <Button type="button" variant="outline" size="sm" onClick={toggleTheme}>
                                     <Sun className="mr-2 h-4 w-4 dark:hidden" />
                                     <Moon className="mr-2 h-4 w-4 hidden dark:block" />
-                                    {theme === "dark" ? "Dark" : "Light"}
+                                    {nextThemeLabel}
                                 </Button>
 
                                 <Button type="button" variant="outline" size="sm" onClick={toggleLang}>
                                     <Languages className="mr-2 h-4 w-4" />
-                                    {lang.toUpperCase()}
+                                    {nextLangLabel}
                                 </Button>
 
                                 <Button asChild variant="outline" size="sm">
@@ -202,12 +205,12 @@ export default function Navbar({ lang, setLang }: Props) {
                 <Button type="button" variant="outline" size="sm" onClick={toggleTheme} className="shadow-sm">
                     <Sun className="mr-2 h-4 w-4 dark:hidden" />
                     <Moon className="mr-2 h-4 w-4 hidden dark:block" />
-                    {theme === "dark" ? "Dark" : "Light"}
+                    {nextThemeLabel}
                 </Button>
 
                 <Button type="button" variant="outline" size="sm" onClick={toggleLang} className="shadow-sm">
                     <Languages className="mr-2 h-4 w-4" />
-                    {lang.toUpperCase()}
+                    {nextLangLabel}
                 </Button>
 
                 <Button asChild size="sm" className="shadow-sm">
