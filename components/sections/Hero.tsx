@@ -97,15 +97,15 @@ export default function Hero({lang}: Props) {
                         </div>
                     </div>
 
-                    <Separator className="mt-6"/>
+                    {/*<Separator className="mt-6"/>*/}
 
-                    <div className="flex flex-wrap gap-2 pt-4">
-                        {techStack.map((tech) => (
-                            <Badge key={tech} variant="outline">
-                                {tech}
-                            </Badge>
-                        ))}
-                    </div>
+                    {/*<div className="flex flex-wrap gap-2 pt-4">*/}
+                    {/*    {techStack.map((tech) => (*/}
+                    {/*        <Badge key={tech} variant="outline">*/}
+                    {/*            {tech}*/}
+                    {/*        </Badge>*/}
+                    {/*    ))}*/}
+                    {/*</div>*/}
                 </div>
 
                 {/* Right: photo */}

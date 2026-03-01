@@ -29,26 +29,30 @@ export const i18n = {
         },
         about: {
             title: "About",
-            intro:
-                "Backend-focused software engineer with experience building production-grade systems in recruitment and pharmaceutical e-commerce. I design structured data models, build reliable APIs, and lead backend delivery with a focus on clarity and long-term maintainability.",
-
-            whatIDo: "What I do",
-            lookingFor: "What I’m looking for",
-
-            whatIDoBullets: [
-                "Design scalable backend architectures and relational database schemas",
-                "Translate complex business workflows into clean, testable API logic",
-                "Build structured permission systems (RBAC) and multi-role workflows",
-                "Handle production challenges: data migration, performance tuning, search optimization",
-                "Lead backend teams: sprint planning, code reviews, technical decisions",
+            headline: "Backend Engineer (2+ years)",
+            techChips: [
+                "Python",
+                "Django/DRF",
+                "PostgreSQL",
+                "Redis",
+                "Elasticsearch",
+                "Celery",
+                "Docker",
+                "Next js",
+                "Vue js",
             ],
-
-            lookingForBullets: [
-                "Working Student or Junior Backend role in Germany",
-                "Teams building real products with meaningful technical challenges",
-                "Backend-heavy environments (APIs, data systems, distributed workflows)",
-                "Opportunities to grow into system design and technical ownership",
+            paragraph:
+                "Backend engineer with 2+ years of experience building and maintaining production systems. Worked on real-world platforms including recruitment and pharmaceutical ordering systems, focusing on scalable architecture, performance, and reliability. Take ownership of backend components from design to deployment, while collaborating closely with product and frontend teams.",
+            contributionTitle: "How I contribute",
+            contributionBullets: [
+                "End-to-end features: scalable APIs/schemas + integrated frontends (Nextjs, Vuejs)",
+                "Designed REST APIs, relational database schemas, and backend architecture",
+                "Improved system performance using query optimization, indexing, caching, and background tasks",
+                "Implemented RBAC, permission systems, and workflow-driven backend logic",
+                "Owned backend features end-to-end, from design and implementation to deployment and maintenance",
+                "Contributed across the stack when needed using Next.js and Vue.js",
             ],
+            currently: "Open to Working Student/Junior Backend or Full-Stack Software developer roles in Germany",
         },
         skills: {
             title: "Skills",
@@ -106,27 +110,31 @@ export const i18n = {
         },
         about: {
             title: "Über mich",
-            intro:
-                "Backend-orientierter Software Engineer mit Erfahrung in produktiven Systemen im Recruiting- und Pharma-E-Commerce-Bereich. Ich entwerfe strukturierte Datenmodelle, entwickle zuverlässige APIs und übernehme Verantwortung für Backend-Delivery mit Fokus auf Klarheit und langfristige Wartbarkeit.",
-
-            whatIDo: "Was ich mache",
-            lookingFor: "Wonach ich suche",
-
-            whatIDoBullets: [
-                "Skalierbare Backend-Architekturen und relationale Datenbankschemata entwerfen",
-                "Komplexe Business-Workflows in saubere, testbare API-Logik übersetzen",
-                "Strukturierte Permission-Systeme (RBAC) und Multi-Rollen-Workflows implementieren",
-                "Produktionsherausforderungen lösen: Datenmigration, Performance-Tuning, Search-Optimierung",
-                "Backend-Teams führen: Sprint-Planung, Code-Reviews, technische Entscheidungen",
+            headline: "Backend Engineer (2+ Jahre)",
+            techChips: [
+                "Python",
+                "Django/DRF",
+                "PostgreSQL",
+                "Redis",
+                "Elasticsearch",
+                "Celery",
+                "Docker",
+                "Next.js",
             ],
-
-            lookingForBullets: [
-                "Werkstudent oder Junior Backend Position in Deutschland",
-                "Teams, die reale Produkte mit echten technischen Herausforderungen bauen",
-                "Backend-lastige Umgebungen (APIs, Daten-Systeme, verteilte Workflows)",
-                "Möglichkeiten, in Richtung System Design und technische Verantwortung zu wachsen",
+            paragraph:
+                "Backend Engineer mit 2+ Jahren Erfahrung im Aufbau und Betrieb produktiver Systeme. Arbeit an realen Plattformen, darunter Recruiting- und Pharma-Bestellsysteme, mit Fokus auf skalierbare Architektur, Performance und Zuverlässigkeit. Übernehme Verantwortung für Backend-Komponenten von Design bis Deployment und arbeite eng mit Produkt- und Frontend-Teams zusammen.",
+            contributionTitle: "Wie ich beitrage",
+            contributionBullets: [
+                "End-to-End Features: skalierbare APIs/Schemata + integrierte Frontends (Nextjs, Vuejs)",
+                "REST APIs, Datenbankschemata und Backend-Architektur entworfen und implementiert",
+                "Systemperformance durch Query-Optimierung, Indexing, Caching und Background-Tasks verbessert",
+                "RBAC-, Berechtigungs- und Workflow-Systeme implementiert",
+                "Backend-Features eigenständig von Design bis Deployment umgesetzt",
+                "Bei Bedarf Full-Stack beigetragen mit Next.js und Vue.js",
             ],
+            currently: "Offen für Werkstudenten- / Junior-Backend- oder Full-Stack-Software-Developer-Rollen in Deutschland",
         },
+
         skills: {
             title: "Skills",
             subtitle:
