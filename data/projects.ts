@@ -1,23 +1,159 @@
 import type { Lang } from "@/data/i18n";
 
+export type ProjectOwner = "repliq" | "personal" | "client";
+
+export type ProjectMeta = {
+    owner: ProjectOwner;
+    ownerName?: string;
+};
+
 export type ProjectLinks = {
     website?: string;
     github?: string;
     demo?: string;
 };
 
+export type ProjectDuration = {
+    start: {
+        month: number; // 1–12
+        year: number;
+    };
+    end?: {
+        month: number;
+        year: number;
+    };
+    isOngoing?: boolean;
+};
+
+function getDurationStatusBadge(duration: ProjectDuration, lang: Lang) {
+    if (duration.isOngoing) {
+        return {
+            label: lang === "de" ? "● Aktiv" : "● Active",
+            variant: "default" as const,
+        };
+    }
+
+    return {
+        label: lang === "de" ? "○ Abgeschlossen" : "○ Completed",
+        variant: "outline" as const,
+    };
+}
+
+function getOwnerLabel(meta: ProjectMeta, lang: Lang) {
+    if (meta.ownerName) return meta.ownerName;
+
+    if (meta.owner === "repliq") return "REPLIQ Limited";
+    if (meta.owner === "personal") return lang === "de" ? "Privatprojekt" : "Personal";
+    return lang === "de" ? "Kunde" : "Client";
+}
+
+function getOwnerIcon(owner: string) {
+    if (owner === "personal") return "👤";
+    return "🏢";
+}
+
+
 export type Project = {
     id: string;
     title: Record<Lang, string>;
     about: Record<Lang, string>;
     role: Record<Lang, string>;
+    duration: ProjectDuration;
     whatIDid: Record<Lang, string[]>;
     businessImpact: Record<Lang, string[]>;
     tech: string[];
     links?: ProjectLinks;
+    meta: ProjectMeta;
 };
 
 export const projects: Project[] = [
+    {
+        id: "shikhon",
+
+        title: {
+            en: "Shikhon — AI-assisted Online Learning Platform for Bangladeshi Curriculum",
+            de: "Shikhon — KI-gestützte Online-Lernplattform für den bangladeschischen Lehrplan",
+        },
+
+        about: {
+            en:
+                "An AI-assisted online learning platform designed for Bangladeshi students from elementary to high school. The platform combines structured lessons, practice exercises, animated explanatory videos, and real tutor-led classes. It also includes parental access to monitor student progress weekly and monthly. The system is designed to make education more accessible, engaging, and scalable.",
+            de:
+                "Eine KI-gestützte Online-Lernplattform für bangladeschische Schüler (Grundschule bis High School). Die Plattform kombiniert strukturierte Lektionen, Übungen, animierte Videos und tutor-geführte Live-Unterrichtseinheiten. Eltern können den Lernfortschritt wöchentlich und monatlich verfolgen. Ziel ist es, Bildung zugänglicher, verständlicher und skalierbar zu machen.",
+        },
+
+        role: {
+            en: "Full-Stack Developer, System Architect & Product Owner (personal project)",
+            de: "Full-Stack Entwickler, Systemarchitekt & Product Owner (Privatprojekt)",
+        },
+
+        duration: {
+            start: { month: 2, year: 2026 },
+            isOngoing: true,
+        },
+
+        meta: {
+            owner: "personal",
+            ownerName: "Personal Project",
+        },
+
+        whatIDid: {
+            en: [
+                "Defined product vision and created user stories for students, tutors, and parents",
+                "Designed system architecture for scalable course delivery, progress tracking, and tutor workflows",
+                "Researched and designed AI-assisted learning support using structured practice and explanatory video content",
+                "Built frontend using Next.js, TypeScript, and shadcn/ui with modular, scalable component architecture",
+                "Developed backend using Django and Django REST Framework with clean API boundaries",
+                "Designed relational database schema for users, courses, lessons, tutor sessions, and progress tracking",
+                "Implemented parent access model to monitor children's weekly and monthly learning progress",
+                "Designed tutor workflow system where real tutors conduct classes based on structured learning plans",
+                "Deployed early production version and configured domain, hosting, and environment",
+            ],
+
+            de: [
+                "Produktvision definiert und User Stories für Schüler, Tutoren und Eltern erstellt",
+                "Systemarchitektur für skalierbare Kursbereitstellung und Fortschrittsverfolgung entworfen",
+                "KI-unterstütztes Lernkonzept mit Übungen und erklärenden Videos konzipiert",
+                "Frontend mit Next.js, TypeScript und shadcn/ui entwickelt",
+                "Backend mit Django und Django REST Framework implementiert",
+                "Relationales Datenbankschema für Nutzer, Kurse, Lektionen und Fortschritt entworfen",
+                "Elternzugang zur Fortschrittsüberwachung implementiert",
+                "Tutor-Workflow für strukturierte Unterrichtspläne entworfen",
+                "Frühe Version deployed und Hosting konfiguriert",
+            ],
+        },
+
+        businessImpact: {
+            en: [
+                "Addresses real educational challenges in Bangladesh with scalable digital learning infrastructure",
+                "Demonstrates full product ownership from idea, user research, architecture, and implementation",
+                "Designed to support large-scale student learning with AI-assisted educational workflows",
+                "Improves transparency and trust through parental progress tracking",
+            ],
+
+            de: [
+                "Adressiert reale Bildungsprobleme mit skalierbarer digitaler Infrastruktur",
+                "Demonstriert vollständige Produktverantwortung von Idee bis Implementierung",
+                "Vorbereitet für KI-gestützte Lernprozesse",
+                "Verbessert Transparenz durch Eltern-Fortschrittsberichte",
+            ],
+        },
+
+        tech: [
+            "Next.js",
+            "TypeScript",
+            "shadcn/ui",
+            "Tailwind CSS",
+            "Django",
+            "Django REST Framework",
+            "PostgreSQL",
+            "Docker",
+        ],
+
+        links: {
+            website: "https://shikhon.shahensaifullah.com",
+        },
+    },
     {
         id: "prohr",
         title: {
@@ -33,6 +169,15 @@ export const projects: Project[] = [
         role: {
             en: "Backend Team Lead (built from scratch, led delivery)",
             de: "Backend Team Lead (von Grund auf aufgebaut, Delivery verantwortet)",
+        },
+        duration: {
+            start: { month: 4, year: 2023 },
+            end: { month: 12, year: 2024 },
+            isOngoing: false,
+        },
+        meta: {
+            owner: "repliq",
+            ownerName: "REPLIQ Limited",
         },
         whatIDid: {
             en: [
@@ -96,8 +241,17 @@ export const projects: Project[] = [
                 "Eine stark frequentierte B2B Pharma-Plattform in Bangladesch mit E-Commerce, Delivery-Tracking und operativen Workflows. Hauptaufgabe: drei Order-Quellen in einen Workflow vereinheitlichen und Legacy-Orders migrieren, ohne die Finance-Dashboards zu brechen.",
         },
         role: {
-            en: "Backend Lead (Order V2 + production data migration)",
-            de: "Backend Lead (Order V2 + Produktivdaten-Migration)",
+            en: "Backend Lead",
+            de: "Backend Lead",
+        },
+        duration: {
+            start: { month: 5, year: 2024 },
+            end: { month: 3, year: 2025 },
+            isOngoing: false,
+        },
+        meta: {
+            owner: "repliq",
+            ownerName: "REPLIQ Limited",
         },
         whatIDid: {
             en: [
@@ -146,8 +300,8 @@ export const projects: Project[] = [
     {
         id: "pharmik",
         title: {
-            en: "Pharmik — B2C Pharmaceutical Platform (stopped due to budget)",
-            de: "Pharmik — B2C Pharma-Plattform (gestoppt wegen Budget)",
+            en: "Pharmik — B2C Pharmaceutical Platform (archived)",
+            de: "Pharmik — B2C Pharma-Plattform (Archiviert)",
         },
         about: {
             en:
@@ -155,9 +309,18 @@ export const projects: Project[] = [
             de:
                 "Eine B2C Pharma-E-Commerce-Plattform (Shop → Endkunde), parallel zum Pharma-Ökosystem entwickelt. Das Projekt wurde aus Budgetgründen gestoppt.",
         },
+        meta: {
+            owner: "repliq",
+            ownerName: "REPLIQ Limited",
+        },
         role: {
             en: "Backend Developer (early-stage build)",
             de: "Backend Developer (Early-Stage Aufbau)",
+        },
+        duration: {
+            start: { month: 12, year: 2022 },
+            end: { month: 1, year: 2023 },
+            isOngoing: false,
         },
         whatIDid: {
             en: [
@@ -209,6 +372,15 @@ export const projects: Project[] = [
         role: {
             en: "Backend Developer (sprint delivery)",
             de: "Backend Developer (Sprint Delivery)",
+        },
+        duration: {
+            start: { month: 1, year: 2024 },
+            end: { month: 6, year: 2024 },
+            isOngoing: false,
+        },
+        meta: {
+            owner: "repliq",
+            ownerName: "REPLIQ Limited",
         },
         whatIDid: {
             en: [

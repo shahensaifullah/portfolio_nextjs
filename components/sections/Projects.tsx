@@ -18,6 +18,58 @@ function LinkBtn({ href, label }: { href: string; label: string }) {
     );
 }
 
+type ProjectDuration = {
+    start: { month: number; year: number };
+    end?: { month: number; year: number };
+    isOngoing?: boolean;
+};
+
+type ProjectMeta = {
+    owner: "repliq" | "personal" | "client";
+    ownerName?: string;
+};
+
+function formatDuration(d: ProjectDuration, lang: Lang) {
+    const monthsEn = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+    const monthsDe = ["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"];
+    const months = lang === "de" ? monthsDe : monthsEn;
+
+    const start = `${months[d.start.month - 1]} ${d.start.year}`;
+
+    if (d.isOngoing) return `${start} – ${lang === "de" ? "Heute" : "Present"}`;
+    if (!d.end) return start;
+
+    const end = `${months[d.end.month - 1]} ${d.end.year}`;
+    return `${start} – ${end}`;
+}
+
+function getDurationBadge(d: ProjectDuration, lang: Lang) {
+    if (d.isOngoing) {
+        return { label: lang === "de" ? "● Aktiv" : "● Active", variant: "default" as const };
+    }
+    return { label: lang === "de" ? "○ Abgeschlossen" : "○ Completed", variant: "outline" as const };
+}
+
+function getOwnerBadge(meta: ProjectMeta, lang: Lang) {
+    const label =
+        meta.ownerName ??
+        (meta.owner === "repliq"
+            ? "REPLIQ Limited"
+            : meta.owner === "personal"
+                ? lang === "de"
+                    ? "Privatprojekt"
+                    : "Personal"
+                : lang === "de"
+                    ? "Kunde"
+                    : "Client");
+
+    const icon = meta.owner === "personal" ? "👤" : "🏢";
+    // personal looks softer, company/client looks neutral
+    const variant = meta.owner === "personal" ? ("secondary" as const) : ("outline" as const);
+
+    return { label: `${icon} ${label}`, variant };
+}
+
 export default function Projects({ lang }: Props) {
     const t = i18n[lang].projects;
 
@@ -29,6 +81,7 @@ export default function Projects({ lang }: Props) {
         tech: t.tech,
         details: lang === "de" ? "Details anzeigen" : "Show details",
         hide: lang === "de" ? "Details ausblenden" : "Hide details",
+        duration: lang === "de" ? "Dauer" : "Duration",
     };
 
     return (
@@ -40,6 +93,7 @@ export default function Projects({ lang }: Props) {
 
             <Separator className="my-4" />
 
+
             <div className="grid gap-4">
                 {projects.map((p) => {
                     const linkWebsite = p.links?.website;
@@ -49,9 +103,33 @@ export default function Projects({ lang }: Props) {
                             <CardHeader className="space-y-3">
                                 <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                                     <div className="space-y-2">
+                                        {/* Title + badges */}
                                         <CardTitle className="text-xl">{p.title[lang]}</CardTitle>
+                                        <div className="flex flex-wrap items-center gap-2">
+
+
+                                            {/* Status from duration.isOngoing */}
+                                            {(() => {
+                                                const s = getDurationBadge(p.duration, lang);
+                                                return <Badge variant={s.variant}>{s.label}</Badge>;
+                                            })()}
+
+                                            {/* Owner */}
+                                            {(() => {
+                                                const o = getOwnerBadge(p.meta, lang);
+                                                return <Badge variant={o.variant}>{o.label}</Badge>;
+                                            })()}
+                                        </div>
+
                                         <p className="text-sm text-muted-foreground">{p.about[lang]}</p>
 
+                                        {/* Duration line */}
+                                        <p className="text-sm">
+                                            <span className="text-muted-foreground">{labels.duration}:</span>{" "}
+                                            <span className="font-medium">{formatDuration(p.duration, lang)}</span>
+                                        </p>
+
+                                        {/* Role line */}
                                         <p className="text-sm">
                                             <span className="text-muted-foreground">{labels.role}:</span>{" "}
                                             <span className="font-medium">{p.role[lang]}</span>
