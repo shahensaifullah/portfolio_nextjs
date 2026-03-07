@@ -171,7 +171,7 @@ export const projects: Project[] = [
             de: "Backend Team Lead (von Grund auf aufgebaut, Delivery verantwortet)",
         },
         duration: {
-            start: { month: 4, year: 2023 },
+            start: { month: 2, year: 2024 },
             end: { month: 12, year: 2024 },
             isOngoing: false,
         },
@@ -245,8 +245,8 @@ export const projects: Project[] = [
             de: "Backend Lead",
         },
         duration: {
-            start: { month: 5, year: 2024 },
-            end: { month: 3, year: 2025 },
+            start: { month: 7, year: 2024 },
+            end: { month: 2, year: 2025 },
             isOngoing: false,
         },
         meta: {
@@ -374,8 +374,8 @@ export const projects: Project[] = [
             de: "Backend Developer (Sprint Delivery)",
         },
         duration: {
-            start: { month: 1, year: 2024 },
-            end: { month: 6, year: 2024 },
+            start: { month: 5, year: 2023 },
+            end: { month: 12, year: 2023 },
             isOngoing: false,
         },
         meta: {
